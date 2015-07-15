@@ -3,3 +3,8 @@
  - express <project name>
  - cd <project name>
  - open this folder in webstorm
+ 
+#Understanding stages of the project
+ - git log (will get the commit numbers and messages)
+ - git (cherry-pcik)[http://git-scm.com/docs/git-cherry-pick] <hash>
+ 
