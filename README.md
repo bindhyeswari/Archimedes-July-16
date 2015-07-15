@@ -8,3 +8,7 @@
  - git log (will get the commit numbers and messages)
  - git [cherry-pick](http://git-scm.com/docs/git-cherry-pick) <hash>
  
+#Tasks
+ - Understand code in this session
+ - Implement PUT and DELETE functionality
+ 

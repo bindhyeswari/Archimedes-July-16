@@ -13,7 +13,27 @@
 
       <div ng-controller="HelloWorldController">
         {{message}}
+
+        <section>
+          <header><h2>Create a Contact</h2></header>
+          <form>
+            <input type="text" ng-model="contact.name"/> <br/>
+            <input type="email" ng-model="contact.email"/> <br/>
+            <input type="tel" ng-model="contact.phone"/> <br/>
+          </form>
+          <button ng-click="createContact()">Create Contact</button>
+        </section>
+
+        <section>
+          <header><h2>List of Contacts</h2></header>
+          <div><button ng-click="getContacts()">Get List of Contacts</button></div>
+          <ul>
+            <li ng-repeat="contact in contacts" ng-click="printContact(contact)">{{contact.name}}, {{contact.email}}, {{contact.phone}}</li>
+          </ul>
+        </section>
       </div>
+
+
 
 
     </section>
@@ -22,14 +42,32 @@
 
       angular.module('myApp', []).controller('HelloWorldController', function ($scope, Contact) {
 
+        $scope.contact = {};
+        $scope.createContact = function () {
+          Contact.create($scope.contact).success(function (data) {
+            console.log(data);
+            $scope.contact = {};
+          });
+        }
+
+        $scope.printContact = function (contact) {
+          console.log(contact._id);
+        }
+
         $scope.message = 'Hello World from Node-Angular';
-        Contact.create({
+        /*Contact.create({
           email: 'alejandro@gmail.com',
           name: 'Alejandro',
           phone: '(123) 456-789'
         }).success(function (data) {
           console.log(data);
-        });
+        });*/
+
+        $scope.getContacts = function () {
+          Contact.get().success(function (contacts) {
+            $scope.contacts = contacts;
+          })
+        };
 
 
       }).factory('Contact', function ($http) {
@@ -37,6 +75,9 @@
         return {
             create: function (contact_object) {
               return $http.post('/contacts', contact_object);
+            },
+            get: function () {
+              return $http.get('/contacts');
             }
         };
 
