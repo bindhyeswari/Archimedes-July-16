@@ -20,8 +20,26 @@
     <script src="/angular/angular.js"></script>
     <script>
 
-      angular.module('myApp', []).controller('HelloWorldController', function ($scope) {
+      angular.module('myApp', []).controller('HelloWorldController', function ($scope, Contact) {
+
         $scope.message = 'Hello World from Node-Angular';
+        Contact.create({
+          email: 'alejandro@gmail.com',
+          name: 'Alejandro',
+          phone: '(123) 456-789'
+        }).success(function (data) {
+          console.log(data);
+        });
+
+
+      }).factory('Contact', function ($http) {
+
+        return {
+            create: function (contact_object) {
+              return $http.post('/contacts', contact_object);
+            }
+        };
+
       });
 
       console.log(angular.module('myApp'));
