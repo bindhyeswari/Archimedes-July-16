@@ -6,5 +6,5 @@
  
 #Understanding stages of the project
  - git log (will get the commit numbers and messages)
- - git (cherry-pcik)[http://git-scm.com/docs/git-cherry-pick] <hash>
+ - git [cherry-pick](http://git-scm.com/docs/git-cherry-pick) <hash>
  
