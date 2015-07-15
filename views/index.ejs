@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Single Page Application</title>
+    <link rel="stylesheet" href="/css/base.css"/>
+
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+    <section ng-app="myApp">
+
+      Write Hello World Application for AngularJS here ...
+
+      <div ng-controller="HelloWorldController">
+        {{message}}
+      </div>
+
+
+    </section>
+    <script src="/angular/angular.js"></script>
+    <script>
+
+      angular.module('myApp', []).controller('HelloWorldController', function ($scope) {
+        $scope.message = 'Hello World from Node-Angular';
+      });
+
+      console.log(angular.module('myApp'));
+
+    </script>
   </body>
 </html>
