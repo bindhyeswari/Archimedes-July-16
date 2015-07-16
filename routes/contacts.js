@@ -22,5 +22,9 @@ router.post('/', function (req, res) {
     });
 });
 
+router.put('/contacts/:id', function (req, res) {
+    console.log(req.params.id);
+});
+
 
 module.exports = router;

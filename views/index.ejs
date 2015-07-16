@@ -3,6 +3,12 @@
   <head>
     <title>Single Page Application</title>
     <link rel="stylesheet" href="/css/base.css"/>
+    <style>
+      .enabled {
+        background-color: green;
+        color: white
+      }
+    </style>
 
   </head>
   <body>
@@ -16,7 +22,7 @@
 
         <section>
           <header><h2>Create a Contact</h2></header>
-          <form>
+          <form novalidate>
             <input type="text" ng-model="contact.name"/> <br/>
             <input type="email" ng-model="contact.email"/> <br/>
             <input type="tel" ng-model="contact.phone"/> <br/>
@@ -27,8 +33,13 @@
         <section>
           <header><h2>List of Contacts</h2></header>
           <div><button ng-click="getContacts()">Get List of Contacts</button></div>
+          <input type="text" class="enabled"/>
           <ul>
-            <li ng-repeat="contact in contacts" ng-click="printContact(contact)">{{contact.name}}, {{contact.email}}, {{contact.phone}}</li>
+            <li ng-repeat="contact in contacts" ng-click="printContact(contact)">
+              <input type="text" ng-model="contact.name" ng-class="{enabled: contact.enabled}"/>
+              <button ng-click="edit(contact)">Edit</button>
+              <button ng-click="updateContact(contact)">Save Changes</button>
+            </li>
           </ul>
         </section>
       </div>
@@ -54,6 +65,17 @@
           console.log(contact._id);
         }
 
+        $scope.edit = function (contact) {
+            contact.enabled = contact.enabled ? false : true;
+        };
+
+        $scope.updateContact = function (contact) {
+          console.log(contact);
+          Contact.update(contact);
+        };
+
+
+
         $scope.message = 'Hello World from Node-Angular';
         /*Contact.create({
           email: 'alejandro@gmail.com',
@@ -78,6 +100,13 @@
             },
             get: function () {
               return $http.get('/contacts');
+            },
+            update: function (contact) {
+              return $http.put('/contacts/' + contact._id, contact);
+              // todo: change this to work with a configuration object for params
+            },
+            delete: function (contact) {
+              return $http.delete('/contacts/', + contact._id);
             }
         };
 
