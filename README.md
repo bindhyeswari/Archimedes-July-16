@@ -11,4 +11,8 @@
 #Tasks
  - Understand code in this session
  - Implement PUT and DELETE functionality
+ - Read up on mongoose documentation - http://mongoosejs.com/
+ - [query in mongodb](http://docs.mongodb.org/manual/tutorial/query-documents/)
+ - [findByIdAndUpdate](http://mongoosejs.com/docs/documents.htm)
+ 
  
