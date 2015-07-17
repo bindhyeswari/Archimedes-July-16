@@ -1,3 +1,6 @@
+#References
+ - [Express API](http://expressjs.com/api.html)
+
 #Express Generator
  - Install express generator --> sudo npm install -g express-generator
  - express <project name>

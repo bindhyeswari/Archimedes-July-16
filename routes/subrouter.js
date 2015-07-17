@@ -1,8 +1,10 @@
 /**
- * Created by mishrab on 7/15/15.
+ * Created by mishrab on 7/17/15.
  */
 
 var mongoose = require('mongoose');
+var schemaType = mongoose.Schema;
+// todo: get the schematype and ObjectID
 var restgenerator = require('../module/simple_rest_generator');
 
 mongoose.connect('mongodb://localhost/test', function (err) {
@@ -24,7 +26,19 @@ var Contact = mongoose.model('contact', {
     }
 });
 
+var Order = mongoose.model('order', {
+    items: schemaType.Types.Mixed,
+    contact_id: {
+        type: String, // ObjectId instead of a string
+        required: true
+    }
+});
 
-var router = restgenerator(Contact);
 
-module.exports = router;
+
+module.exports = function (app) {
+
+    app.use('/contacts', restgenerator(Contact));
+    app.use('/orders', restgenerator(Order));
+
+};
