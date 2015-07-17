@@ -19,35 +19,43 @@ var Contact = mongoose.model('contact', {
         unique: true,
         required: true
     },
-    tel: String
-});
-var contact = new Contact({
-    name: 'Hamid', email: 'hamid2@gmail.com', tel: '8569513215'
-});
-contact.save(function (err, result) {
-    console.log(err);
-    //console.log(result);
+    tel: {
+        type: String,
+        required: true
+    }
 });
 
-Contact.find({email: 'hamid2@gmail.com'}, function (err, results) {
-    console.log(results);
-});
-
-console.log(uuid.v4());
-
-var contacts = [];
 
 // this callback is executed for all get requests to /contacts
 router.get('/', function (req, res) {
-    res.status(200).json(contacts)
+    // find call to mongoose
+    Contact.find(function (err, response) {
+        if (err) {
+            res.status(500).json({ message: 'Something Broke!' });
+        } else {
+            res.status(200).json(response);
+        }
+    });
 });
 
 router.post('/', function (req, res) {
-
+    (new Contact(req.body)).save(function (err, response) {
+        if (err) {
+            res.status(500).json({ message: 'Something Broke!' });
+        } else {
+            res.status(201).json(response);
+        }
+    });
 });
 
 router.put('/contacts/:id', function (req, res) {
-    console.log(req.params.id);
+    Contact.findByIdAndUpdate(req.params.id, req.body, function () {
+
+    });
+});
+
+router.delete('/contacts/:id', function (req, res) {
+
 });
 
 
