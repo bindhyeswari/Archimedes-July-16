@@ -48,14 +48,24 @@ router.post('/', function (req, res) {
     });
 });
 
-router.put('/contacts/:id', function (req, res) {
-    Contact.findByIdAndUpdate(req.params.id, req.body, function () {
-
+router.put('/:id', function (req, res) {
+    Contact.findByIdAndUpdate(req.params.id, req.body, function (err, response) {
+        if (err) {
+            res.status(500).json({ message: 'Something Broke!' });
+        } else {
+            res.status(200).json(response);
+        }
     });
 });
 
-router.delete('/contacts/:id', function (req, res) {
-
+router.delete('/:id', function (req, res) {
+    Contact.findByIdAndRemove(req.params.id, function (err, response) {
+        if (err) {
+            res.status(500).json({ message: 'Something Broke!' });
+        } else {
+            res.status(200).json(response);
+        }
+    });
 });
 
 
