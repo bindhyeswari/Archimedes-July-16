@@ -15,4 +15,8 @@
  - [query in mongodb](http://docs.mongodb.org/manual/tutorial/query-documents/)
  - [findByIdAndUpdate](http://mongoosejs.com/docs/documents.htm)
  
+#Issues with installing mongoose on Windows
+ - [https://github.com/TooTallNate/node-gyp/issues/421#issuecomment-49251267](https://github.com/TooTallNate/node-gyp/issues/421#issuecomment-49251267)
+ 
+ 
  
